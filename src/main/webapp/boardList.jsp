@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,7 +26,7 @@
 	}
 
 	table {
-		width: 800px;
+		width: 700px;
 		border-collapse: collapse;
 		background-color: white;
 		box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -75,7 +76,7 @@
 			//게시글(boardDto)를 여러개 담을 ArrayList 준비(선언)
 			
 			// 넣은 순서대로 차곡차곡 쌓인다
-			boardList.add(new BoardDto(1, "안녕하세요, 좋아요", "박서하",  "2025-08-06"));
+			boardList.add(new BoardDto(1, "안녕하세요, 좋아요, 좋은하루 보내세요 감사합니다 안녕히 계세요!!!안녕히 계세요! 안녕히! 계세요!!!", "박서하",  "2025-08-06"));
 			boardList.add(new BoardDto(2, "날씨가좋아요","한승아",  "2025-08-05"));
 			boardList.add(new BoardDto(3,  "집에갈래요","안세희", "2025-08-04"));
 			boardList.add(new BoardDto(4, "첫글입니다, 안녕!", "전유린",  "2025-08-03"));
@@ -98,7 +99,16 @@
 		<c:forEach var="boardDto" items="${boardList}">  <!--  boardDto는 임시이름 / items안에는 배열과 collection / 순서가 없는건 들어올 수 없다 -->
 			<tr>
 				<td>${boardDto.bnum}</td>
-				<td><a href="#">${boardDto.btitle}</a></td>
+				<td>
+					<c:choose>
+						<c:when test="${fn:length(boardDto.btitle)>30}">
+							<a href="#">${fn:substring(boardDto.btitle,0,30)}...</a>
+						</c:when>
+						<c:otherwise>
+							<a href="#">${boardDto.btitle}</a>
+						</c:otherwise>
+					</c:choose>
+				</td>
 				<td>${boardDto.bwriter}</td>
 				<td>${boardDto.bdate}</td>
 			</tr>
