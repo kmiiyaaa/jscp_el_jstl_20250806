@@ -100,6 +100,7 @@
 			<tr>
 				<td>${boardDto.bnum}</td>
 				<td>
+				<!-- 게시판 글 제목이 30자 이상일때 30자 이상은 ...표시  -->
 					<c:choose>
 						<c:when test="${fn:length(boardDto.btitle)>30}">
 							<a href="#">${fn:substring(boardDto.btitle,0,30)}...</a>
