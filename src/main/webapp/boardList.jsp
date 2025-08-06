@@ -8,6 +8,62 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style type="text/css">
+<style>
+	body {
+		font-family: '맑은 고딕', sans-serif;
+		background-color: #f9f9f9;
+		padding: 30px;
+	}
+
+	h2 {
+		color: #003366;
+		border-bottom: 2px solid #003366;
+		padding-bottom: 10px;
+		width: 800px;
+		margin-bottom: 20px;
+	}
+
+	table {
+		width: 800px;
+		border-collapse: collapse;
+		background-color: white;
+		box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	}
+
+	th, td {
+		border: 1px solid #ccc;
+		padding: 12px;
+		text-align: center;
+		font-size: 15px;
+	}
+
+	th {
+		background-color: #004080;
+		color: white;
+	}
+
+	tr:nth-child(even) {
+		background-color: #f2f6fb;
+	}
+
+	tr:hover {
+		background-color: #dce6f1;
+	}
+
+	a {
+		text-decoration: none;
+		color: #004080;
+		font-weight: bold;
+	}
+
+	a:hover {
+		color: #00264d;
+		text-decoration: underline;
+	}
+</style>
+
+</style>
 <title>자유 게시판</title>
 </head>
 <body>
@@ -18,18 +74,19 @@
 			List<BoardDto> boardList = new ArrayList<BoardDto>();
 			//게시글(boardDto)를 여러개 담을 ArrayList 준비(선언)
 			
-			boardList.add(new BoardDto(1, "박서하", "난 석진부인서하", "2025-08-06"));
-			boardList.add(new BoardDto(2, "한승아", "난 뜽아", "2025-08-05"));
-			boardList.add(new BoardDto(3, "안세희", "안녕 난 세히안!", "2025-08-04"));
-			boardList.add(new BoardDto(4, "전유린", "유링기애오", "2025-08-03"));
-			boardList.add(new BoardDto(5, "오진",  "오랑맘 진이에영", "2025-08-02"));
+			// 넣은 순서대로 차곡차곡 쌓인다
+			boardList.add(new BoardDto(1, "안녕하세요, 좋아요", "박서하",  "2025-08-06"));
+			boardList.add(new BoardDto(2, "날씨가좋아요","한승아",  "2025-08-05"));
+			boardList.add(new BoardDto(3,  "집에갈래요","안세희", "2025-08-04"));
+			boardList.add(new BoardDto(4, "첫글입니다, 안녕!", "전유린",  "2025-08-03"));
+			boardList.add(new BoardDto(5, "반갑습니다", "오진",   "2025-08-02"));
 			
 			request.setAttribute("boardList", boardList);  
 	%>
 	
 	<h2>자유 게시판 목록</h2>
 	<hr>
-	<table border="1" cellspacing="0" cellpadding="0">
+	<table >
 		<tr>
 			<th>No.</th>
 			<th>제목</th>
@@ -38,10 +95,10 @@
 		</tr>
 		
 		
-		<c:forEach var="boardDto" items="${boardList}">
+		<c:forEach var="boardDto" items="${boardList}">  <!--  boardDto는 임시이름 / items안에는 배열과 collection / 순서가 없는건 들어올 수 없다 -->
 			<tr>
 				<td>${boardDto.bnum}</td>
-				<td>${boardDto.btitle}</td>
+				<td><a href="#">${boardDto.btitle}</a></td>
 				<td>${boardDto.bwriter}</td>
 				<td>${boardDto.bdate}</td>
 			</tr>
